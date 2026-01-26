@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 27 Monday and Tuesday Practice Quiz</title>
+    <style>
+        /* --- CSS Variables & Themes --- */
+        :root {
+            /* Base Transition */
+            --transition-speed: 0.3s;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 1. Modern Dark (Default) */
+        [data-theme="dark"] {
+            --bg-body: #1e293b;
+            --bg-card: #334155;
+            --bg-header: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-accent: #38bdf8;
+            --border-color: #475569;
+            --highlight-bg: #475569;
+            --button-bg: #38bdf8;
+            --button-text: #0f172a;
+            --button-hover: #0ea5e9;
+            --feedback-success-bg: #064e3b;
+            --feedback-success-border: #059669;
+            --feedback-success-text: #a7f3d0;
+            --feedback-error-bg: #7f1d1d;
+            --feedback-error-border: #dc2626;
+            --feedback-error-text: #fecaca;
+        }
+
+        /* 2. Modern Light */
+        [data-theme="light"] {
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --text-accent: #2563eb;
+            --border-color: #e5e7eb;
+            --highlight-bg: #f3f4f6;
+            --button-bg: #2563eb;
+            --button-text: #ffffff;
+            --button-hover: #1d4ed8;
+            --feedback-success-bg: #ecfdf5;
+            --feedback-success-border: #34d399;
+            --feedback-success-text: #065f46;
+            --feedback-error-bg: #fef2f2;
+            --feedback-error-border: #f87171;
+            --feedback-error-text: #991b1b;
+        }
+
+        /* 3. Midnight (Pure Black) */
+        [data-theme="midnight"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --text-accent: #90caf9;
+            --border-color: #333333;
+            --highlight-bg: #1a1a1a;
+            --button-bg: #90caf9;
+            --button-text: #000000;
+            --button-hover: #42a5f5;
+            --feedback-success-bg: #051b11;
+            --feedback-success-border: #0f5132;
+            --feedback-success-text: #75b798;
+            --feedback-error-bg: #2c0b0e;
+            --feedback-error-border: #842029;
+            --feedback-error-text: #ea868f;
+        }
+
+        /* 4. Legacy Dark (Original) */
+        [data-theme="legacy-dark"] {
+            --bg-body: #2d343e;
+            --bg-card: #3c424f;
+            --bg-header: #3c424f;
+            --text-main: #e8e6e3;
+            --text-muted: #b0c4de;
+            --text-accent: #8ab4f8;
+            --border-color: #555;
+            --highlight-bg: #454c5a;
+            --button-bg: #8ab4f8;
+            --button-text: #202124;
+            --button-hover: #a3c5f9;
+            --feedback-success-bg: #344e41;
+            --feedback-success-border: #52b788;
+            --feedback-success-text: #c7f9cc;
+            --feedback-error-bg: #5e2129;
+            --feedback-error-border: #a4133c;
+            --feedback-error-text: #f8d7da;
+        }
+
+        /* 5. Sepia (Reading Mode) */
+        [data-theme="sepia"] {
+            --bg-body: #f4ecd8;
+            --bg-card: #fdf6e3;
+            --bg-header: #e4d5b7;
+            --text-main: #433422;
+            --text-muted: #7c6f5a;
+            --text-accent: #a05a2c;
+            --border-color: #d3c4a5;
+            --highlight-bg: #ebe1c9;
+            --button-bg: #a05a2c;
+            --button-text: #fdf6e3;
+            --button-hover: #864822;
+            --feedback-success-bg: #e6f4ea;
+            --feedback-success-border: #8ab893;
+            --feedback-success-text: #2e4c35;
+            --feedback-error-bg: #f9e3e3;
+            --feedback-error-border: #d48f8f;
+            --feedback-error-text: #5c2b2b;
+        }
+
+        /* 6. High Contrast */
+        [data-theme="contrast"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #ffffff;
+            --text-muted: #dddddd;
+            --text-accent: #ffff00;
+            --border-color: #ffffff;
+            --highlight-bg: #333333;
+            --button-bg: #ffff00;
+            --button-text: #000000;
+            --button-hover: #e6e600;
+            --feedback-success-bg: #000000;
+            --feedback-success-border: #00ff00;
+            --feedback-success-text: #00ff00;
+            --feedback-error-bg: #000000;
+            --feedback-error-border: #ff0000;
+            --feedback-error-text: #ff0000;
+        }
+
+        /* --- Global Reset & Layout --- */
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Default to Sticky */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Class to remove sticky behavior */
+        header.unpinned {
+            position: relative;
+            box-shadow: none;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--text-accent);
+        }
+
+        .controls-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pin-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .pin-btn:hover {
+            background-color: var(--highlight-bg);
+        }
+
+        .pin-btn.pin-active {
+            color: var(--text-accent);
+            border-color: var(--text-accent);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        select#theme-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* --- Main Content --- */
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem 4rem 1rem;
+        }
+
+        .section-header {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-accent);
+            color: var(--text-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* --- Question Card --- */
+        .question-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .lo-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--text-accent);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Options --- */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: var(--highlight-bg);
+            border-color: var(--text-muted);
+        }
+
+        .option-label input {
+            margin-top: 0.3rem;
+            margin-right: 1rem;
+            accent-color: var(--text-accent);
+            transform: scale(1.2);
+        }
+
+        /* --- Buttons --- */
+        .btn-check {
+            margin-top: 1.5rem;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-check:hover {
+            opacity: 0.9;
+        }
+
+        /* --- Feedback Area --- */
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+            border: 1px solid transparent;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background-color: var(--feedback-success-bg);
+            border-color: var(--feedback-success-border);
+            color: var(--feedback-success-text);
+        }
+
+        .feedback.incorrect {
+            background-color: var(--feedback-error-bg);
+            border-color: var(--feedback-error-border);
+            color: var(--feedback-error-text);
+        }
+
+        .feedback-header {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .rationale {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .source {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: italic;
+            border-top: 1px dashed currentColor;
+            padding-top: 0.5rem;
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 600px) {
+            header { padding: 1rem; flex-direction: column; gap: 10px; align-items: flex-start; }
+            .controls-wrapper { width: 100%; justify-content: space-between; }
+            .question-card { padding: 1.5rem; }
+            header h1 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <h1>Week 27 Monday and Tuesday Practice Quiz</h1>
+        <div class="controls-wrapper">
+            <!-- Pin Button -->
+            <button class="pin-btn pin-active" id="pin-btn" onclick="toggleHeader()" title="Pin/Unpin Header">
+                📍
+            </button>
+            
+            <div class="theme-control">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select" onchange="changeTheme(this.value)">
+                    <option value="dark">Modern Dark</option>
+                    <option value="midnight">Midnight</option>
+                    <option value="light">Modern Light</option>
+                    <option value="legacy-dark">Legacy Dark</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="contrast">High Contrast</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="quiz-root">
+        <!-- Content injected via JS -->
+    </div>
+
+    <script>
+        // --- Data ---
+        const quizData = [
+            // --- Section 1: Vascular Pathology ---
+            {
+                section: "Vascular Pathology",
+                maskedLO: "LO1: Review gross and microscopic findings associated with [specific vascular condition].",
+                fullLO: "LO1: Review gross and microscopic findings associated with atherosclerosis",
+                question: "A 60-year-old male dies of a myocardial infarction. Autopsy reveals extensive hardening of the large and medium-sized arteries. Microscopic examination of the vessel walls shows proliferation of cells within the intima that are producing extracellular collagen. Which of the following cell types is primarily responsible for this proliferative process described in the pathogenesis of this condition?",
+                options: {
+                    A: "Endothelial cells",
+                    B: "Fibroblasts",
+                    C: "Lymphocytes",
+                    D: "Macrophages",
+                    E: "Smooth muscle cells"
+                },
+                correctAnswer: "E",
+                rationale: "The pathogenesis of atherosclerosis involves smooth muscle cell proliferation within the intima, which leads to extracellular collagen production and plaque formation.",
+                source: "Vascular_Pathology_PDF.pdf, Page 7: \"Smooth muscle cell proliferation within the intima leading to extracellular collagen production in the intima and plaque formation\""
+            },
+            {
+                section: "Vascular Pathology",
+                maskedLO: "LO1: Review gross and microscopic findings associated with [specific vascular condition].",
+                fullLO: "LO1: Review gross and microscopic findings associated with atherosclerosis",
+                question: "A 55-year-old female undergoes vascular surgery. A specimen of her aorta reveals a raised lesion within the intima composed of lipid and collagen covered by a fibrous cap. This lesion protrudes into the lumen. Which of the following is the correct pathologic term for this finding?",
+                options: {
+                    A: "Arteriolosclerosis",
+                    B: "Atheroma",
+                    C: "Fatty streak",
+                    D: "Medial calcific sclerosis",
+                    E: "Monckeberg sclerosis"
+                },
+                correctAnswer: "B",
+                rationale: "Atherosclerosis is related to changes in the intima leading to the formation of atheromas (or plaques), which are raised lesions of lipid and collagen covered by a fibrous cap. Fatty streaks are earlier lesions (lipid only), and medial calcific sclerosis affects the media, not the intima.",
+                source: "Vascular_Pathology_PDF.pdf, Page 5: \"Related to changes within the intima of arteries leading to formation of atheromas or plaques which are raised lesions of lipid and collagen deposited in intima, which over time become covered by fibrous cap\""
+            },
+            {
+                section: "Vascular Pathology",
+                maskedLO: "LO2: Classify aneurysms as to etiology and location.",
+                fullLO: "LO2: Classify aneurysms as to etiology and location",
+                question: "A 72-year-old male presents with a pulsatile abdominal mass. Imaging confirms an aneurysm of the abdominal aorta. Based on the most common pathophysiology for this location, this patient likely has a history of which underlying condition?",
+                options: {
+                    A: "Cystic medial necrosis",
+                    B: "Marfan syndrome",
+                    C: "Severe atherosclerosis",
+                    D: "Tertiary syphilis",
+                    E: "Trauma"
+                },
+                correctAnswer: "C",
+                rationale: "Abdominal aortic aneurysms (AAA) are associated with severe atherosclerosis, which leads to weakening of the underlying media.",
+                source: "Vascular_Pathology_PDF.pdf, Page 18: \"Abdominal Aorta Aneurysms (AAA)... Development associated with severe atherosclerosis of abdominal aorta\""
+            },
+            {
+                section: "Vascular Pathology",
+                maskedLO: "LO2: Classify aneurysms as to etiology and location.",
+                fullLO: "LO2: Classify aneurysms as to etiology and location",
+                question: "A 65-year-old male presents with signs of aortic insufficiency. Imaging reveals a saccular aneurysm of the ascending aorta. Histologic review of the aortic wall shows obliterative endarteritis of the vasa vasorum with a \"tree bark\" appearance of the intima. What is the most likely etiology?",
+                options: {
+                    A: "Atherosclerosis",
+                    B: "Dissection",
+                    C: "Hypertension",
+                    D: "Syphilis",
+                    E: "Vasculitis"
+                },
+                correctAnswer: "D",
+                rationale: "Thoracic aortic aneurysms in the ascending aorta with a \"tree bark\" intimal appearance and obliterative endarteritis of the vasa vasorum are characteristic of tertiary syphilis.",
+                source: "Vascular_Pathology_PDF.pdf, Page 20: \"Thoracic Aortic Aneurysms... Associated with the tertiary phase of syphilis... Leading to wrinkled appearance of intima grossly resembling 'tree bark'\""
+            },
+            {
+                section: "Vascular Pathology",
+                maskedLO: "LO3: Characterize forms of vasculitis.",
+                fullLO: "LO3: Characterize forms of vasculitis",
+                question: "A 75-year-old female presents with a severe unilateral headache and visual impairment. A biopsy of the temporal artery reveals chronic granulomatous inflammation with multinucleated giant cells. This condition affects which type of blood vessels?",
+                options: {
+                    A: "Capillaries only",
+                    B: "Large veins",
+                    C: "Small arteries in the head",
+                    D: "Small veins",
+                    E: "The aorta and its major branches"
+                },
+                correctAnswer: "C",
+                rationale: "Giant Cell (Temporal) Arteritis primarily affects small arteries located in the head, such as the temporal and ophthalmic arteries.",
+                source: "Vascular_Pathology_PDF.pdf, Page 27: \"Giant Cell (Temporal) Arteritis... Primarily affects small arteries located in the head\""
+            },
+            {
+                section: "Vascular Pathology",
+                maskedLO: "LO3: Characterize forms of vasculitis.",
+                fullLO: "LO3: Characterize forms of vasculitis",
+                question: "A 4-year-old boy presents with fever, conjunctival erosion, and a \"strawberry tongue.\" He also has enlarged cervical lymph nodes. The physician is concerned about a vasculitis that is the leading cause of acquired heart disease in children. What is the specific cardiac risk associated with this condition?",
+                options: {
+                    A: "Aortic dissection",
+                    B: "Calcific aortic stenosis",
+                    C: "Coronary artery aneurysms",
+                    D: "Mitral valve prolapse",
+                    E: "Pericardial effusion"
+                },
+                correctAnswer: "C",
+                rationale: "Kawasaki Disease is the leading cause of acquired heart disease in children and involves cardiac involvement in 20% of cases, specifically secondary aneurysms arising in the coronary artery.",
+                source: "Vascular_Pathology_PDF.pdf, Page 31: \"Kawasaki Disease... Cardiac involvement in 20% secondary aneurysms arising in coronary artery leading to myocardial infarction\""
+            },
+            {
+                section: "Vascular Pathology",
+                maskedLO: "LO4: Differentiate the pathology of superficial vs deep vein thrombosis.",
+                fullLO: "LO4: Differentiate the pathology of superficial vs deep vein thrombosis",
+                question: "A 50-year-old female presents with pain and edema in her left lower extremity following a long international flight. Ultrasound confirms a deep leg vein thrombosis. Which of the following is a potential major complication of this specific condition?",
+                options: {
+                    A: "Arterial ischemia",
+                    B: "Gangrene of the toes",
+                    C: "Pulmonary thromboembolism",
+                    D: "Stasis dermatitis",
+                    E: "Varicose veins"
+                },
+                correctAnswer: "C",
+                rationale: "Deep leg vein thrombosis (thrombophlebitis) is contributory to pulmonary emboli.",
+                source: "Vascular_Pathology_PDF.pdf, Page 53: \"Thrombophlebitis... Thrombosis of deep leg veins... Contributory to pulmonary emboli\""
+            },
+            {
+                section: "Vascular Pathology",
+                maskedLO: "LO4: Differentiate the pathology of superficial vs deep vein thrombosis.",
+                fullLO: "LO4: Differentiate the pathology of superficial vs deep vein thrombosis",
+                question: "A 60-year-old male presents with dilated, tortuous superficial veins in his lower extremities. Physical exam reveals stasis dermatitis and ulceration of the overlying skin. Regarding the risk of embolization, which of the following statements is accurate for this condition?",
+                options: {
+                    A: "It is a common cause of paradoxical embolism",
+                    B: "It is a frequent cause of stroke",
+                    C: "It is noncontributory to pulmonary thromboemboli",
+                    D: "It poses a high risk for myocardial infarction",
+                    E: "It requires inferior vena cava filter placement"
+                },
+                correctAnswer: "C",
+                rationale: "Varicose veins involve superficial veins and are noncontributory to pulmonary thromboemboli.",
+                source: "Vascular_Pathology_PDF.pdf, Page 49: \"Varicose Veins... Noncontributory to pulmonary thromboemboli\""
+            },
+            {
+                section: "Vascular Pathology",
+                maskedLO: "LO5: Review types of vascular tumors.",
+                fullLO: "LO5: Review types of vascular tumors",
+                question: "A 35-year-old male with a history of HIV/AIDS presents with purple-colored tumors on his skin. A biopsy reveals malignant spindle-shaped endothelial cells forming vascular channels. This tumor is associated with which pathogen?",
+                options: {
+                    A: "Epstein-Barr Virus (EBV)",
+                    B: "Hepatitis B Virus (HBV)",
+                    C: "Human Herpesvirus-8 (HHV-8)",
+                    D: "Human Papillomavirus (HPV)",
+                    E: "Staphylococcus aureus"
+                },
+                correctAnswer: "C",
+                rationale: "Kaposi Sarcoma is a malignant tumor derived from endothelium, associated with HHV-8, and the epidemic form is seen in patients with AIDS.",
+                source: "Vascular_Pathology_PDF.pdf, Pages 58-59: \"Kaposi Sarcoma... HHV-8 implicated... HIV associated type... Epidemic form in patients with AIDS\""
+            },
+            {
+                section: "Vascular Pathology",
+                maskedLO: "LO5: Review types of vascular tumors.",
+                fullLO: "LO5: Review types of vascular tumors",
+                question: "A 60-year-old male works in a factory where he is exposed to polyvinyl chloride. He develops a malignant liver tumor composed of plump, anaplastic endothelial cells producing vascular channels. What is the most likely diagnosis?",
+                options: {
+                    A: "Angiosarcoma",
+                    B: "Cavernous hemangioma",
+                    C: "Hepatocellular carcinoma",
+                    D: "Kaposi sarcoma",
+                    E: "Metastatic adenocarcinoma"
+                },
+                correctAnswer: "A",
+                rationale: "Angiosarcoma of the liver is a malignant vascular tumor associated with exposure to Thoratrast, arsenic, and polyvinyl chloride.",
+                source: "Vascular_Pathology_PDF.pdf, Page 57: \"Angiosarcoma of Liver : Plump, anaplastic endothelial cells producing vascular channels... Associated with Thoratrast, arsenic and polyvinyl chloride\""
+            },
+
+            // --- Section 2: Peripheral Vascular Disease ---
+            {
+                section: "Peripheral Vascular Disease",
+                maskedLO: "LO1: Understand the natural history of vascular disease.",
+                fullLO: "LO1: Understand the natural history of vascular disease",
+                question: "A patient is diagnosed with lower extremity peripheral arterial disease (PAD). When discussing the natural history of this condition, the physician explains that the patient is at highest risk for mortality due to pathology in which organ system?",
+                options: {
+                    A: "Brain (Stroke)",
+                    B: "Heart (Coronary Artery Disease)",
+                    C: "Kidneys (Renal Failure)",
+                    D: "Lungs (Pulmonary Embolism)",
+                    E: "Stomach (Ischemic Bowel)"
+                },
+                correctAnswer: "B",
+                rationale: "In the natural history of PAD, cardiac disease is the biggest risk, and patients often succumb to coronary artery disease (CAD) before limb loss.",
+                source: "Peripheral_Vascular_Disease_PDF.pdf, Page 18: \"Natural history of lower extremity peripheral arterial disease... In most cases, the patient succumbs from CAD before the limb is lost. Heart disease is the major killer!\""
+            },
+            {
+                section: "Peripheral Vascular Disease",
+                maskedLO: "LO1: Understand the natural history of vascular disease.",
+                fullLO: "LO1: Understand the natural history of vascular disease",
+                question: "A patient presents with critical limb ischemia (CLI). The physician explains that this is a more severe form of PAD. Without intervention, what is the approximate one-year amputation rate for patients with this presentation?",
+                options: {
+                    A: "< 1%",
+                    B: "5%",
+                    C: "10%",
+                    D: "20-50%",
+                    E: "90%"
+                },
+                correctAnswer: "D",
+                rationale: "For critical ischemia, 20-50% of patients require amputation within 1 year if no intervention is performed.",
+                source: "Peripheral_Vascular_Disease_PDF.pdf, Page 24: \"Critical Ischemia (CLI, CLTI)... 20-50% require amputation within 1 year if no intervention\""
+            },
+            {
+                section: "Peripheral Vascular Disease",
+                maskedLO: "LO2: Learn options for treating vascular disease.",
+                fullLO: "LO2: Learn options for treating vascular disease",
+                question: "A patient with intermittent claudication asks about treatment options. He prefers to avoid surgery. Which of the following medical therapies is most preferred and effective for symptom management?",
+                options: {
+                    A: "Anticoagulation with Warfarin",
+                    B: "Bed rest",
+                    C: "High-dose opioids",
+                    D: "Smoking cessation and exercise",
+                    E: "Vitamin E supplementation"
+                },
+                correctAnswer: "D",
+                rationale: "Medical therapy is most patients' preference and includes smoking cessation, exercise, modifying risk factors, and anti-platelet therapy.",
+                source: "Peripheral_Vascular_Disease_PDF.pdf, Page 25: \"Medical Therapy – Most Patients’ Preference... Smoking cessation... Exercise\""
+            },
+            {
+                section: "Peripheral Vascular Disease",
+                maskedLO: "LO2: Learn options for treating vascular disease.",
+                fullLO: "LO2: Learn options for treating vascular disease",
+                question: "A patient with critical limb ischemia requires revascularization. He has a suitable great saphenous vein available for bypass. According to the BEST-CLI trial, which treatment modality offers the best outcomes for this specific patient?",
+                options: {
+                    A: "Endovascular therapy with bare metal stents",
+                    B: "Endovascular therapy with drug-eluting stents",
+                    C: "Medical management only",
+                    D: "Surgical bypass",
+                    E: "Sympathectomy"
+                },
+                correctAnswer: "D",
+                rationale: "The BEST-CLI trial concluded that if a vein is available, surgical bypass should be performed first as it had better outcomes than endovascular therapy.",
+                source: "Peripheral_Vascular_Disease_PDF.pdf, Page 36: \"BEST-CLI... Conclusion: If vein available, do bypass first!\""
+            },
+            {
+                section: "Peripheral Vascular Disease",
+                maskedLO: "LO3: Compare the natural history to the treatment options for vascular conditions.",
+                fullLO: "LO3: Compare the natural history to the treatment options for vascular conditions",
+                question: "A 70-year-old patient with an abdominal aortic aneurysm (AAA) is being evaluated for repair. The patient has poor physiological reserve but favorable anatomy. Which repair method balances these risks best by minimizing physiologic stress?",
+                options: {
+                    A: "Endovascular Aneurysm Repair (EVAR)",
+                    B: "Medical management with beta-blockers",
+                    C: "Open aneurysm repair via midline incision",
+                    D: "Open aneurysm repair via retroperitoneal incision",
+                    E: "Thoraco-abdominal bypass"
+                },
+                correctAnswer: "A",
+                rationale: "EVAR is noted for reduced morbidity and quicker recovery, making it suitable for patients with poor physiology (high physiologic risk) but good anatomy.",
+                source: "Peripheral_Vascular_Disease_PDF.pdf, Page 61: \"Which Vascular Tool is Best? Anatomic vs. Physiologic Risk... Endo AAA Repair – Good anatomy – Poor Physiology\""
+            },
+            {
+                section: "Peripheral Vascular Disease",
+                maskedLO: "LO3: Compare the natural history to the treatment options for vascular conditions.",
+                fullLO: "LO3: Compare the natural history to the treatment options for vascular conditions",
+                question: "A patient is found to have asymptomatic carotid artery stenosis. According to Class 1 evidence, surgical repair (endarterectomy) improves survival and reduces stroke risk when the degree of stenosis exceeds which threshold?",
+                options: {
+                    A: "> 30%",
+                    B: "> 40%",
+                    C: "> 50%",
+                    D: "> 60%",
+                    E: "> 90%"
+                },
+                correctAnswer: "D",
+                rationale: "Carotid artery stenosis is the only peripheral artery proven with Class 1 evidence that repair of asymptomatic stenosis > 60% improves survival and reduces stroke.",
+                source: "Peripheral_Vascular_Disease_PDF.pdf, Page 38: \"Carotid Artery Stenosis... repair of asymptomatic stenosis > 60% improves survival and reduces stroke\""
+            },
+
+            // --- Section 3: Cardiovascular System Development ---
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO1: Describe the differentiation of segments of the early heart tube...",
+                fullLO: "LO1: Describe the differentiation of segments of the early heart tube and its inflow and outflow vessels into the fetal and adult chambers and major vessels. Compare the positions of the future heart chambers, AV canal, and truncus arteriosus before and after heart tube looping, and after further growth and alignment of these structures in preparation for septation.",
+                question: "During heart development, the primitive heart tube undergoes looping. Following this process, the bulbus cordis differentiates primarily into which adult structure?",
+                options: {
+                    A: "Ascending aorta",
+                    B: "Left ventricle",
+                    C: "Pulmonary trunk",
+                    D: "Right atrium",
+                    E: "Right ventricle"
+                },
+                correctAnswer: "E",
+                rationale: "The bulbus cordis becomes part of the right ventricle and the base of the outflow tract.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Slide 31: \"Bulbus cordis -> Right ventricle, base of outflow under both aortic and pulmonic valves\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO1: Describe the differentiation of segments of the early heart tube...",
+                fullLO: "LO1: Describe the differentiation of segments of the early heart tube and its inflow and outflow vessels into the fetal and adult chambers and major vessels. Compare the positions of the future heart chambers, AV canal, and truncus arteriosus before and after heart tube looping, and after further growth and alignment of these structures in preparation for septation.",
+                question: "A newborn is diagnosed with primary ciliary dyskinesia. A chest X-ray reveals the apex of the heart pointing to the right side of the chest. This anomaly, resulting from a defect in the direction of heart looping, is known as:",
+                options: {
+                    A: "Dextrocardia",
+                    B: "Ectopia cordis",
+                    C: "Levocardia",
+                    D: "Situs solitus",
+                    E: "Transposition"
+                },
+                correctAnswer: "A",
+                rationale: "Dextrocardia results from reversed looping of the heart tube to the left side (L-looping) instead of the right. It is often associated with primary ciliary dyskinesia.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Page 3: \"Dextrocardia results from reversed looping of the heart tube to the left side of the body... Dextrocardia most often occurs in context of primary ciliary dyskinesias\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO2: Describe atrioventricular (AV) canal septation...",
+                fullLO: "LO2: Describe atrioventricular (AV) canal septation, identifying origin of the cells forming the endocardial cushions, and how these cushions form and grow. Discuss the hypothesized embryologic origin of the complete AV canal defect (AVCD) and its association with Down syndrome.",
+                question: "The formation of the AV septum (septum intermedium) requires the fusion of the superior and inferior endocardial cushions. The cells that form these cushions originate from which tissue via an epithelial-to-mesenchymal transition (EMT)?",
+                options: {
+                    A: "Cardiac jelly",
+                    B: "Endocardium",
+                    C: "Epicardium",
+                    D: "Neural crest",
+                    E: "Splanchnic mesoderm"
+                },
+                correctAnswer: "B",
+                rationale: "Endocardial cells lining the AV canal undergo EMT to form single migratory (endocardial cushion) cells that migrate into the cardiac jelly.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Page 4: \"Embryologic process: To form the endocardial cushions, endocardial cells lining the AV canal... undergo an epithelial-to-mesenchymal transition (EMT)\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO2: Describe atrioventricular (AV) canal septation...",
+                fullLO: "LO2: Describe atrioventricular (AV) canal septation, identifying origin of the cells forming the endocardial cushions, and how these cushions form and grow. Discuss the hypothesized embryologic origin of the complete AV canal defect (AVCD) and its association with Down syndrome.",
+                question: "A newborn with Trisomy 21 (Down syndrome) is diagnosed with a congenital heart defect affecting the atrioventricular valves and septa. The embryologic basis for this defect is a failure of endocardial cushion cells to migrate effectively. What is the specific defect described?",
+                options: {
+                    A: "Complete AV canal defect",
+                    B: "Double-inlet left ventricle",
+                    C: "Hypoplastic left heart",
+                    D: "Tetralogy of Fallot",
+                    E: "Transposition of the great arteries"
+                },
+                correctAnswer: "A",
+                rationale: "In Trisomy 21, complete AV canal defect is common. It is caused by fewer endocardial cushion cells migrating into the cardiac jelly, preventing the formation of the septum intermedium.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Page 5: \"In Trisomy 21 (Down syndrome) where complete AV canal defect is common, fewer endocardial cushion cells migrate into the cardiac jelly.\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO3: Describe atrial septation...",
+                fullLO: "LO3: Describe atrial septation, with attention to which initial structures give rise to the two parts of the final atrial septum. Compare & contrast the two most common persistent openings between the atria after birth, including secundum-type atrial septal defects (ASDs) and patent foramen ovale (PFO), by their developmental basis and clinical presentation.",
+                question: "A 25-year-old female undergoes an echocardiogram which reveals a patent foramen ovale (PFO). This condition results from the failure of fusion between which two structures after birth?",
+                options: {
+                    A: "Endocardial cushions and septum primum",
+                    B: "Septum primum and septum secundum",
+                    C: "Septum secundum and septum intermedium",
+                    D: "Valve of the coronary sinus and septum primum",
+                    E: "Valve of the IVC and septum secundum"
+                },
+                correctAnswer: "B",
+                rationale: "A PFO results from the failure to anatomically fuse the septum primum (valve of the foramen ovale) and the septum secundum by fibrosis in infancy.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Page 8 & Slide 42: \"Patent Foramen Ovale (PFO)... CAUSE: Fail to fuse septa by fibrosis in infancy... Failure to anatomically fuse the septum primum and septum secundum\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO3: Describe atrial septation...",
+                fullLO: "LO3: Describe atrial septation, with attention to which initial structures give rise to the two parts of the final atrial septum. Compare & contrast the two most common persistent openings between the atria after birth, including secundum-type atrial septal defects (ASDs) and patent foramen ovale (PFO), by their developmental basis and clinical presentation.",
+                question: "A child is diagnosed with a secundum-type atrial septal defect (ASD). The embryologic mechanism for this specific defect involves:",
+                options: {
+                    A: "Excessive resorption (apoptosis) of the septum primum",
+                    B: "Failure of the septum primum to fuse with the endocardial cushions",
+                    C: "Failure of the septum secundum to form",
+                    D: "Incomplete migration of neural crest cells",
+                    E: "Malalignment of the atrial septum with the ventricular septum"
+                },
+                correctAnswer: "A",
+                rationale: "Secundum-type ASDs are most commonly due to excessive programmed cell death in the septum primum, leading to a short valve that cannot cover the foramen ovale.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Page 8: \"Secundum-type ASD... Embryology: Most commonly due to excessive programmed cell death in the septum primum\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO4: Describe the formation of the interventricular septum...",
+                fullLO: "LO4: Describe the formation of the interventricular septum. Compare the developmental basis and anatomy of muscular & membranous ventricular septal defects (VSDs). Relate the size and flow through a VSD or other left-to-right shunt (e.g., ASD or patent ductus arteriosus, PDA) to timing and severity of symptoms.",
+                question: "A muscular ventricular septal defect (VSD) is identified in a newborn. This defect is caused by excessive activity of which physiologic process during the formation of the ventricular walls?",
+                options: {
+                    A: "Cavitation (apoptosis)",
+                    B: "Epithelial-to-mesenchymal transition",
+                    C: "Fibrosis",
+                    D: "Hypertrophy",
+                    E: "Neural crest migration"
+                },
+                correctAnswer: "A",
+                rationale: "Muscular VSDs are almost always due to excessive cavitation (programmed cell death) of the myocardial tissue during the sculpting of the ventricular walls.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Slide 43: \"CAUSE of Muscular VSDs: Excessive cavitation of the muscular ventricular septum breaks hole between RV and LV\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO4: Describe the formation of the interventricular septum...",
+                fullLO: "LO4: Describe the formation of the interventricular septum. Compare the developmental basis and anatomy of muscular & membranous ventricular septal defects (VSDs). Relate the size and flow through a VSD or other left-to-right shunt (e.g., ASD or patent ductus arteriosus, PDA) to timing and severity of symptoms.",
+                question: "A membranous ventricular septal defect (VSD) is diagnosed. This defect represents a failure of fusion of tissues from multiple sources. Which of the following tissues contributes to the formation of the membranous interventricular septum?",
+                options: {
+                    A: "Bulbar ridges (conotruncal swellings)",
+                    B: "Epicardium",
+                    C: "Left venous valve",
+                    D: "Septum secundum",
+                    E: "Sinus venosus"
+                },
+                correctAnswer: "A",
+                rationale: "The membranous VSD results from errors in the fusion of the two bulbar ridges, septum intermedium, and the muscular interventricular septum.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Page 9: \"Membranous VSDs result from errors in the extension or fusion of any of the tissues – two bulbar ridges, septum intermedium, upper edge of muscular interventricular septum\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO5: Discuss septation of the outflow tract.",
+                fullLO: "LO5: Discuss septation of the outflow tract. Compare the origin of the cells contributing to the formation of the aorticopulmonary septum to those that form endocardial cushions. Compare & contrast the embryologic basis of two major defects of outflow tract septation (Tetralogy of Fallot, TOF; transposition of the great arteries, TGA), and identify associated clinical features and syndromes.",
+                question: "An infant is diagnosed with Tetralogy of Fallot. The embryologic basis for this condition is the anterior (asymmetric) displacement of the aorticopulmonary septum. This septum is formed largely by the migration of which cell type?",
+                options: {
+                    A: "Cardiac neural crest cells",
+                    B: "Endocardial cells",
+                    C: "Epicardial cells",
+                    D: "Myoblasts",
+                    E: "Splanchnic mesoderm"
+                },
+                correctAnswer: "A",
+                rationale: "The bulbar ridges that form the aorticopulmonary septum are populated by cardiac neural crest cells. Tetralogy of Fallot is the most common defect due to neural crest ingrowth errors leading to asymmetric division.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Slide 51: \"Bulbar ridges are populated by neural crest cells... Most commonly seen defect due to neural crest ingrowth errors... Tetralogy of Fallot\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO5: Discuss septation of the outflow tract.",
+                fullLO: "LO5: Discuss septation of the outflow tract. Compare the origin of the cells contributing to the formation of the aorticopulmonary septum to those that form endocardial cushions. Compare & contrast the embryologic basis of two major defects of outflow tract septation (Tetralogy of Fallot, TOF; transposition of the great arteries, TGA), and identify associated clinical features and syndromes.",
+                question: "A newborn presents with severe cyanosis immediately after birth. Imaging confirms Transposition of the Great Arteries (TGA). Unlike Tetralogy of Fallot, TGA is primarily caused by:",
+                options: {
+                    A: "Defective cardiac jelly synthesis",
+                    B: "Excessive apoptosis of the bulbar ridges",
+                    C: "Failure of the aorticopulmonary septum to spiral",
+                    D: "Incomplete resorption of the ductus arteriosus",
+                    E: "Neural crest cell ablation"
+                },
+                correctAnswer: "C",
+                rationale: "In TGA, the aorticopulmonary septum lacks its normal spiral arrangement, developing in a straight line. It is notably not associated with neural crest defects.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Page 13: \"Embryology: The aorticopulmonary septum lacks its normal spiral arrangement... TGA, unlike other outflow tract defects, is NOT found in association with neural crest cell defects.\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO6: Describe remodeling of the right and left sinus venosus horns...",
+                fullLO: "LO6: Describe remodeling of the right and left sinus venosus horns to direct venous inflow from the body and heart wall to the smooth portion of the right atrium. Discuss normal development of the pulmonary veins and the smooth portion of the left atrium, and how defects in this process lead to total anomalous pulmonary venous return (TAPVR).",
+                question: "During the remodeling of venous inflow to the heart, the left sinus venosus horn regresses. Its primary persistent derivative in the adult heart is the:",
+                options: {
+                    A: "Coronary sinus",
+                    B: "Fossa ovalis",
+                    C: "Inferior vena cava",
+                    D: "Superior vena cava",
+                    E: "Trabeculae carneae"
+                },
+                correctAnswer: "A",
+                rationale: "The left sinus venosus horn shrinks, and its persistent derivatives include the coronary sinus and the oblique vein of the left atrium.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Page 14: \"The left sinus venosus horn shrinks... Its persistent derivatives include only the coronary sinus... and... the oblique vein of the left atrium.\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO6: Describe remodeling of the right and left sinus venosus horns...",
+                fullLO: "LO6: Describe remodeling of the right and left sinus venosus horns to direct venous inflow from the body and heart wall to the smooth portion of the right atrium. Discuss normal development of the pulmonary veins and the smooth portion of the left atrium, and how defects in this process lead to total anomalous pulmonary venous return (TAPVR).",
+                question: "A newborn is diagnosed with Total Anomalous Pulmonary Venous Return (TAPVR). In this condition, the pulmonary veins fail to connect to the left atrium. This defect occurs because the initial pulmonary vein sprout abnormally invades the:",
+                options: {
+                    A: "Aortic sac",
+                    B: "Bulbus cordis",
+                    C: "Primitive ventricle",
+                    D: "Sinus venosus",
+                    E: "Truncus arteriosus"
+                },
+                correctAnswer: "D",
+                rationale: "TAPVR occurs when the initial pulmonary vein sprout invades the sinus venosus (or its derivatives like SVC/IVC) instead of the left atrial wall.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Slide 61: \"CAUSE: the initial pulmonary vein sprout invades the sinus venosus, IVC, or SVC instead of left atrium\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO7: Describe the fate of embryonic aortic arches 3, 4 & 6...",
+                fullLO: "LO7: Describe the fate of embryonic aortic arches 3, 4 & 6, examining differences between structures on the right vs. left. Compare & contrast the embryologic origin and anatomic features of coarctations of the aorta (COA), and of patent ductus arteriosus (PDA) arising from premature birth vs. congenital rubella infection.",
+                question: "A newborn presents with differential cyanosis (pink upper body, blue lower body). This presentation is characteristic of a severe Coarctation of the Aorta. The embryologic cause of this defect is hypothesized to be the abnormal extension of which tissue into the aortic wall?",
+                options: {
+                    A: "Cardiac jelly",
+                    B: "Ductus arteriosus muscle",
+                    C: "Neural crest cells",
+                    D: "Splanchnic mesoderm",
+                    E: "Thymic tissue"
+                },
+                correctAnswer: "B",
+                rationale: "Coarctation is hypothesized to involve the extension of ductus muscle into the aorta wall, which constricts after birth.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Slide 71: \"CAUSE: Hypothesized... to involve extension of ductus muscle into the aorta wall, so that when this muscle constricts after birth, the coarctation narrows\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO7: Describe the fate of embryonic aortic arches 3, 4 & 6...",
+                fullLO: "LO7: Describe the fate of embryonic aortic arches 3, 4 & 6, examining differences between structures on the right vs. left. Compare & contrast the embryologic origin and anatomic features of coarctations of the aorta (COA), and of patent ductus arteriosus (PDA) arising from premature birth vs. congenital rubella infection.",
+                question: "An infant born at 28 weeks gestation is found to have a Patent Ductus Arteriosus (PDA). In contrast to a PDA caused by congenital rubella, the PDA in a premature infant is caused by:",
+                options: {
+                    A: "A primary defect in the formation of the aorticopulmonary septum",
+                    B: "Abnormal migration of neural crest cells",
+                    C: "Absence of ductus muscle tissue",
+                    D: "Bacterial infection of the ductus",
+                    E: "Immature lungs producing insufficient prostaglandin-degrading enzymes"
+                },
+                correctAnswer: "E",
+                rationale: "In premature infants, the PDA is a physiological defect where immature lungs do not produce prostaglandin-degrading enzymes, keeping the ductus open. In rubella, it is an anatomic defect (lack of muscle).",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Slide 68: \"Physiological defect – preemie lungs don’t produce prostaglandin-degrading enzymes\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO8: Compare blood flow pattern and oxygenation...",
+                fullLO: "LO8: Compare blood flow pattern and oxygenation through the circulatory system in fetus vs neonate. Describe how the transition to the mature circulation happens after birth, with attention to the physiology of the atrial septum and ductus arteriosus. Apply knowledge of ductus physiology and pharmacology to therapeutically keeping it open in newborns with some congenital heart conditions (e.g., TGA) and closing it in others (e.g., PDA).",
+                question: "Immediately after birth, the foramen ovale closes functionally. What physiologic change triggers this closure?",
+                options: {
+                    A: "Decrease in right atrial pressure relative to left atrial pressure",
+                    B: "Decrease in systemic vascular resistance",
+                    C: "Increase in prostaglandins",
+                    D: "Increase in pulmonary vascular resistance",
+                    E: "Increase in right ventricular wall thickness"
+                },
+                correctAnswer: "A",
+                rationale: "At birth, pressure increases in the left side of the heart (due to increased pulmonary return). This pressure differential (Left > Right) shuts the valve of the foramen ovale against the septum secundum.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Page 7: \"Functional closure: At birth, pressure increases in the left side of the heart... The valve shuts tight over the foramen ovale preventing movement of blood between the atria\""
+            },
+            {
+                section: "Cardiovascular System Development",
+                maskedLO: "LO8: Compare blood flow pattern and oxygenation...",
+                fullLO: "LO8: Compare blood flow pattern and oxygenation through the circulatory system in fetus vs neonate. Describe how the transition to the mature circulation happens after birth, with attention to the physiology of the atrial septum and ductus arteriosus. Apply knowledge of ductus physiology and pharmacology to therapeutically keeping it open in newborns with some congenital heart conditions (e.g., TGA) and closing it in others (e.g., PDA).",
+                question: "A newborn with Transposition of the Great Arteries (TGA) requires the ductus arteriosus to remain open to sustain life until surgery. Which pharmacologic agent is administered to maintain ductus patency?",
+                options: {
+                    A: "Aspirin",
+                    B: "Ibuprofen",
+                    C: "Indomethacin",
+                    D: "Prostaglandin E2",
+                    E: "Surfactant"
+                },
+                correctAnswer: "D",
+                rationale: "Prostaglandin E2 relaxes the ductus muscle. It is used to keep the ductus open in ductus-dependent lesions like TGA.",
+                source: "Cardiovascular_Development_and_Defects_PDF.pdf, Page 13: \"Supportive medical treatment in the newborn with TGA includes administration of prostaglandin E2 to keep the ductus arteriosus open\""
+            },
+
+            // --- Section 4: Cardiomyopathies & Cardiac Valve Pathology ---
+            {
+                section: "Cardiomyopathies & Cardiac Valve Pathology",
+                maskedLO: "LO1: Compare and contrast the gross and microscopic appearance of the three principle types of cardiomyopathies...",
+                fullLO: "LO1: Compare and contrast the gross and microscopic appearance of the three principle types of cardiomyopathies : dilated, hypertrophic, and restrictive",
+                question: "A 22-year-old athlete collapses and dies during a basketball game. Autopsy reveals a heart weight of 650g with asymmetric septal hypertrophy. Microscopic examination of the septum shows haphazard disarray of myocardial cells. What is the most likely diagnosis?",
+                options: {
+                    A: "Dilated cardiomyopathy",
+                    B: "Hypertensive heart disease",
+                    C: "Hypertrophic cardiomyopathy",
+                    D: "Myocarditis",
+                    E: "Restrictive cardiomyopathy"
+                },
+                correctAnswer: "C",
+                rationale: "Hypertrophic cardiomyopathy is characterized by asymmetric septal hypertrophy and specific histologic changes including myofiber disarray. It is a common cause of sudden death in athletes.",
+                source: "Cardiovascular_Pathology_PDF.pdf, Page 17: \"Hypertrophic Cardiomyopathy... Histology – specific changes... Haphazard disarray of myocardial cells (myofiber disarray)\""
+            },
+            {
+                section: "Cardiomyopathies & Cardiac Valve Pathology",
+                maskedLO: "LO1: Compare and contrast the gross and microscopic appearance of the three principle types of cardiomyopathies...",
+                fullLO: "LO1: Compare and contrast the gross and microscopic appearance of the three principle types of cardiomyopathies : dilated, hypertrophic, and restrictive",
+                question: "A 45-year-old male with a history of chronic alcohol abuse presents with signs of heart failure. Echocardiography shows four-chamber dilatation and global systolic dysfunction. Gross examination of the heart would likely describe it as:",
+                options: {
+                    A: "Asymmetric septal hypertrophy",
+                    B: "Concentric hypertrophy",
+                    C: "Flabby and heavy (>600gm)",
+                    D: "Normal size with stiff walls",
+                    E: "Small and atrophic"
+                },
+                correctAnswer: "C",
+                rationale: "Dilated cardiomyopathy presents grossly as a \"flabby heart\" with four-chamber dilatation and increased weight (>600gm).",
+                source: "Cardiovascular_Pathology_PDF.pdf, Page 5: \"Dilated Cardiomyopathy... Gross... 'Flabby heart'... Four chamber dilatation... Heavy – weight greater than 600gm\""
+            },
+            {
+                section: "Cardiomyopathies & Cardiac Valve Pathology",
+                maskedLO: "LO2: Discuss the typical histopathology of myocarditis...",
+                fullLO: "LO2: Discuss the typical histopathology of myocarditis related to viruses and toxoplasmosis",
+                question: "A patient dies of heart failure following a flu-like illness. Histologic examination of the myocardium reveals interstitial inflammation composed primarily of lymphocytes with adjacent focal necrosis of myocytes. This finding is most consistent with:",
+                options: {
+                    A: "Amyloidosis",
+                    B: "Giant cell myocarditis",
+                    C: "Hemochromatosis",
+                    D: "Hypersensitivity myocarditis",
+                    E: "Viral myocarditis"
+                },
+                correctAnswer: "E",
+                rationale: "Viral myocarditis is characterized histologically by interstitial inflammation (lymphocytes) and focal necrosis of myocytes.",
+                source: "Cardiovascular_Pathology_PDF.pdf, Pages 27 & 29: \"Viral related myocarditis... Lymphocytes\" and \"Histology – interstitial inflammation with focal necrosis of myocytes adjacent to inflammatory cells\""
+            },
+            {
+                section: "Cardiomyopathies & Cardiac Valve Pathology",
+                maskedLO: "LO2: Discuss the typical histopathology of myocarditis...",
+                fullLO: "LO2: Discuss the typical histopathology of myocarditis related to viruses and toxoplasmosis",
+                question: "A patient with AIDS develops myocarditis. A myocardial biopsy shows lymphocytes, plasma cells, and cysts within the myocyte sarcoplasm containing bradyzoites. What is the etiologic agent?",
+                options: {
+                    A: "Coxsackie B virus",
+                    B: "Cytomegalovirus",
+                    C: "Staphylococcus aureus",
+                    D: "Toxoplasma gondii",
+                    E: "Trypanosoma cruzi"
+                },
+                correctAnswer: "D",
+                rationale: "Toxoplasma gondii causes myocarditis characterized by cysts within the myocyte sarcoplasm containing bradyzoites.",
+                source: "Cardiovascular_Pathology_PDF.pdf, Page 31: \"Toxoplasmosis-related myocarditis... Organisms- toxoplasma forms cysts within the myocyte sarcoplasm which contain bradyzoites\""
+            },
+            {
+                section: "Cardiomyopathies & Cardiac Valve Pathology",
+                maskedLO: "LO3: Compare and contrast the pathology of various forms of acquired abnormalities of cardiac valves.",
+                fullLO: "LO3: Compare and contrast the pathology of various forms of acquired abnormalities of cardiac valves",
+                question: "A 12-year-old female presents with fever and a new heart murmur. She had a severe sore throat 3 weeks ago. Histologic examination of the heart valves would likely reveal Aschoff bodies and Anitschkow cells. These findings are pathognomonic for:",
+                options: {
+                    A: "Calcific aortic stenosis",
+                    B: "Infective endocarditis",
+                    C: "Libman-Sacks endocarditis",
+                    D: "Nonbacterial thrombotic endocarditis",
+                    E: "Rheumatic heart disease"
+                },
+                correctAnswer: "E",
+                rationale: "Acute Rheumatic Heart Disease is characterized by pancarditis including Aschoff bodies and Anitschkow cells (caterpillar cells).",
+                source: "Cardiovascular_Pathology_PDF.pdf, Page 33: \"Rheumatic Heart Disease Acute Phase... Aschoff bodies... Antischkow cells\""
+            },
+            {
+                section: "Cardiomyopathies & Cardiac Valve Pathology",
+                maskedLO: "LO3: Compare and contrast the pathology of various forms of acquired abnormalities of cardiac valves.",
+                fullLO: "LO3: Compare and contrast the pathology of various forms of acquired abnormalities of cardiac valves",
+                question: "A 30-year-old female presents with palpitations. Echocardiogram shows billowing of the mitral valve leaflets into the left atrium during systole. The underlying pathology involves the accumulation of loose myxomatous connective tissue within the leaflets. This condition is known as:",
+                options: {
+                    A: "Calcific mitral stenosis",
+                    B: "Infective endocarditis",
+                    C: "Mitral valve prolapse",
+                    D: "Rheumatic valve disease",
+                    E: "Syphilitic heart disease"
+                },
+                correctAnswer: "C",
+                rationale: "Mitral Valve Prolapse involves intrinsic accumulation of loose (myxomatous) connective tissue, leading to a \"floppy\" valve that balloons into the left atrium.",
+                source: "Cardiovascular_Pathology_PDF.pdf, Page 45: \"Mitral Valve Prolapse... Intrinsic accumulation of loose (myxomatous) connective tissue... Prolapses(balloons) into the left atrium\""
+            }
+        ];
+
+        // --- Core Logic ---
+        const quizRoot = document.getElementById('quiz-root');
+        const themeSelect = document.getElementById('theme-select');
+        const pinBtn = document.getElementById('pin-btn');
+        const mainHeader = document.getElementById('main-header');
+
+        function initQuiz() {
+            // Render Questions
+            let currentSection = "";
+            
+            quizData.forEach((item, index) => {
+                // Insert Section Header if needed
+                if (item.section !== currentSection) {
+                    currentSection = item.section;
+                    const sectionHeader = document.createElement('h2');
+                    sectionHeader.className = 'section-header';
+                    sectionHeader.textContent = currentSection;
+                    quizRoot.appendChild(sectionHeader);
+                }
+
+                // Create Card
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${index}`;
+
+                // Learning Objective (Masked)
+                const loBox = document.createElement('div');
+                loBox.className = 'lo-box';
+                loBox.id = `lo-${index}`;
+                loBox.textContent = item.maskedLO;
+                card.appendChild(loBox);
+
+                // Question Text
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.textContent = `${index + 1}. ${item.question}`;
+                card.appendChild(qText);
+
+                // Options Container
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+
+                for (const [key, value] of Object.entries(item.options)) {
+                    const label = document.createElement('label');
+                    label.className = 'option-label';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question-${index}`;
+                    input.value = key;
+
+                    const span = document.createElement('span');
+                    // Retain letters: A. Option Text
+                    span.textContent = `${key}. ${value}`;
+
+                    label.appendChild(input);
+                    label.appendChild(span);
+                    optionsGrid.appendChild(label);
+                }
+                card.appendChild(optionsGrid);
+
+                // Check Button
+                const btn = document.createElement('button');
+                btn.className = 'btn-check';
+                btn.textContent = 'Check Answer';
+                btn.onclick = () => checkAnswer(index);
+                card.appendChild(btn);
+
+                // Feedback Container
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+                feedback.id = `feedback-${index}`;
+                card.appendChild(feedback);
+
+                quizRoot.appendChild(card);
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('quizTheme') || 'dark';
+            changeTheme(savedTheme);
+            themeSelect.value = savedTheme;
+
+            // Load saved pin state
+            const savedPinState = localStorage.getItem('headerPinned');
+            // Default to true (pinned) if not set or if set to true
+            if (savedPinState === 'false') {
+                toggleHeader(false); 
+            } else {
+                toggleHeader(true);
+            }
+        }
+
+        function checkAnswer(index) {
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            const feedbackEl = document.getElementById(`feedback-${index}`);
+            const loEl = document.getElementById(`lo-${index}`);
+            const data = quizData[index];
+
+            if (!selected) {
+                alert("Please select an answer.");
+                return;
+            }
+
+            // Reveal LO
+            loEl.textContent = data.fullLO;
+
+            // Generate Feedback HTML
+            const isCorrect = selected.value === data.correctAnswer;
+            
+            let html = `<span class="feedback-header">${isCorrect ? "Correct!" : "Incorrect"}</span>`;
+            if (!isCorrect) {
+                html += `<div>The correct answer is <strong>${data.correctAnswer}</strong>.</div>`;
+            }
+            
+            html += `<div class="rationale"><strong>Rationale:</strong> ${data.rationale}</div>`;
+            html += `<div class="source"><strong>Source:</strong> ${data.source}</div>`;
+
+            feedbackEl.innerHTML = html;
+            feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('quizTheme', themeName);
+        }
+
+        function toggleHeader(forceState) {
+            // Determine current state based on class presence
+            const isCurrentlyPinned = !mainHeader.classList.contains('unpinned');
+            
+            // If forceState is provided (boolean), use it. Otherwise toggle current state.
+            const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyPinned;
+
+            if (newState) {
+                // Pin
+                mainHeader.classList.remove('unpinned');
+                pinBtn.classList.add('pin-active');
+                localStorage.setItem('headerPinned', 'true');
+            } else {
+                // Unpin
+                mainHeader.classList.add('unpinned');
+                pinBtn.classList.remove('pin-active');
+                localStorage.setItem('headerPinned', 'false');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initQuiz);
+
+    </script>
+</body>
+</html>
